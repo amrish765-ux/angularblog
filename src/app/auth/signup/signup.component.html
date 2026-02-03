@@ -1,0 +1,59 @@
+<div class="auth-wrap">
+  <div class="auth-card">
+    <h2>Sign Up</h2>
+    <p class="sub">Create an account in a few seconds.</p>
+
+    <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="field">
+        <label>Name</label>
+        <input type="text" formControlName="name" placeholder="Your name">
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="you@email.com">
+        <small *ngIf="form.controls.email.touched && form.controls.email.invalid">
+          Enter a valid email
+        </small>
+      </div>
+
+      <div class="field">
+        <label>Password</label>
+        <input type="password" formControlName="password" placeholder="Min 6 chars">
+      </div>
+
+      <div class="field">
+        <label>Confirm Password</label>
+        <input type="password" formControlName="confirmPassword" placeholder="Repeat password">
+        <small *ngIf="form.touched && form.errors?.['passwordMismatch']">
+          Passwords do not match
+        </small>
+      </div>
+
+      <div class="field">
+        <label>Age</label>
+        <input type="number" formControlName="age" min="1" max="120">
+      </div>
+
+      <div class="field">
+        <label>Gender</label>
+        <select formControlName="gender">
+          <option value="male">male</option>
+          <option value="female">female</option>
+          <option value="other">other</option>
+        </select>
+      </div>
+
+      <p *ngIf="error" class="msg error">{{ error }}</p>
+      <p *ngIf="success" class="msg success">{{ success }}</p>
+
+      <div class="actions">
+        <button type="submit" [disabled]="loading">
+          {{ loading ? 'Creating...' : 'Create Account' }}
+        </button>
+      </div>
+
+      <p class="footer">Already have an account? <a routerLink="/login">Login</a></p>
+    </form>
+  </div>
+</div>
