@@ -1,2 +1,49 @@
-<p>dashboard works!</p>
-<button (click)="logout()">Logout</button>
+<div class="dash">
+    <header class="dash-header">
+        <div>
+            <h2>Your Posts</h2>
+            <p class="subtitle">All posts created by you</p>
+        </div>
+
+        <button class="btn btn-ghost" (click)="logout()">Logout</button>
+    </header>
+
+    <div *ngIf="loading" class="state muted">Loading...</div>
+
+    <div *ngIf="!loading && posts.length === 0" class="state muted">
+        No posts found.
+    </div>
+
+    <section class="grid" *ngIf="!loading && posts.length > 0">
+        <article class="card" *ngFor="let p of posts">
+            <div class="card-top">
+                <div class="title">{{ p.title }}</div>
+
+                <span class="pill">
+                    {{ p.categoryDto?.categoriesTitle || 'No category' }}
+                </span>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-small" (click)="toggleComments(p.postId)">
+                    {{ isExpanded(p.postId) ? 'Hide' : 'Show' }} Comments
+                    ({{ p.comments?.length || 0 }})
+                </button>
+            </div>
+
+            <div class="comments" *ngIf="isExpanded(p.postId)">
+                <div *ngIf="!p.comments?.length" class="muted">No comments yet.</div>
+
+                <div *ngIf="p.comments?.length">
+                    <div class="comments-title">Comments</div>
+                    <div class="comment" *ngFor="let c of p.comments">
+                        <span class="bullet">•</span>
+                        <span class="comment-text">{{ c.content }}</span>
+                    </div>
+                </div>
+            </div>
+
+
+        </article>
+    </section>
+</div>
