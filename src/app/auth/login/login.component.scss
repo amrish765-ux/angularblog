@@ -14,7 +14,9 @@
 .auth-card {
   width: 100%;
   max-width: 420px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  background:
+    radial-gradient(900px 500px at 50% 0%, rgba(108, 92, 231, 0.18), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   border-radius: 16px;
