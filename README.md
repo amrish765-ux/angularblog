@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 # Blogapp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.19.
+This project was generated using [[Angular CLI](https://github.com/angular/angular-cli)](https://amrish765-ux.github.io/angularblog/) version 19.2.19.
 
 ## Development server
 
