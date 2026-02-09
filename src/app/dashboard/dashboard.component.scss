@@ -24,6 +24,26 @@
     font-size: 13px;
   }
 }
+.search {
+  margin: 10px 0 18px;
+  max-width: 900px;
+}
+
+.search input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(231, 236, 255, 0.14);
+  background: rgba(0,0,0,0.18);
+  color: var(--text);
+  outline: none;
+
+  &:focus {
+    border-color: rgba(108, 92, 231, 0.45);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.12);
+  }
+}
+
 
 .state {
   padding: 14px 16px;

@@ -18,4 +18,3 @@ export interface Post {
   };
   comments: { id: number; content: string }[];
 }
-

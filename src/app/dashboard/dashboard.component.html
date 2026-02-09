@@ -1,9 +1,16 @@
 <div class="dash">
     <header class="dash-header">
         <div>
-            <h2>Your Posts</h2>
-            <p class="subtitle">All posts created by you</p>
+            <h2>Posts</h2>
+            <p class="subtitle">All posts</p>
         </div>
+        <div class="search">
+  <input
+    [formControl]="search"
+    type="text"
+    placeholder="Search posts by title... (e.g. hey)"
+  />
+</div>
 
         <button class="btn btn-ghost" (click)="logout()">Logout</button>
     </header>
