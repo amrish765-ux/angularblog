@@ -1,56 +1,76 @@
 <div class="dash">
-    <header class="dash-header">
-        <div>
-            <h2>Posts</h2>
-            <p class="subtitle">All posts</p>
-        </div>
-        <div class="search">
-  <input
-    [formControl]="search"
-    type="text"
-    placeholder="Search posts by title... (e.g. hey)"
-  />
-</div>
-
-        <button class="btn btn-ghost" (click)="logout()">Logout</button>
-    </header>
-
-    <div *ngIf="loading" class="state muted">Loading...</div>
-
-    <div *ngIf="!loading && posts.length === 0" class="state muted">
-        No posts found.
+  <header class="dash-header">
+    <div>
+      <h2>Posts</h2>
+      <p class="subtitle">All posts</p>
     </div>
 
-    <section class="grid" *ngIf="!loading && posts.length > 0">
-        <article class="card" *ngFor="let p of posts">
-            <div class="card-top">
-                <div class="title">{{ p.title }}</div>
+    <div class="search">
+      <input
+        [formControl]="search"
+        type="text"
+        placeholder="Search posts "
+      />
+    </div>
 
-                <span class="pill">
-                    {{ p.categoryDto?.categoriesTitle || 'No category' }}
-                </span>
-            </div>
+    <button class="btn btn-ghost" (click)="logout()">Logout</button>
+  </header>
 
-            <div class="actions">
-                <button class="btn btn-small" (click)="toggleComments(p.postId)">
-                    {{ isExpanded(p.postId) ? 'Hide' : 'Show' }} Comments
-                    ({{ p.comments?.length || 0 }})
-                </button>
-            </div>
+  <div *ngIf="loading" class="state muted">Loading...</div>
 
-            <div class="comments" *ngIf="isExpanded(p.postId)">
-                <div *ngIf="!p.comments?.length" class="muted">No comments yet.</div>
+  <div *ngIf="!loading && posts.length === 0" class="state muted">
+    No posts found.
+  </div>
 
-                <div *ngIf="p.comments?.length">
-                    <div class="comments-title">Comments</div>
-                    <div class="comment" *ngFor="let c of p.comments">
-                        <span class="bullet">•</span>
-                        <span class="comment-text">{{ c.content }}</span>
-                    </div>
-                </div>
-            </div>
+  <section class="grid" *ngIf="!loading && posts.length > 0">
+    <article
+      class="card"
+      *ngFor="let p of posts"
+      [attr.title]="p.title + ' | ' + (p.categoryDto?.categoriesTitle || 'No category')"
+    >
+      <div class="card-top">
+        <!-- Post title tooltip -->
+        <div class="title" [attr.title]='"post"'>
+          {{ p.title }}
+        </div>
 
+        <!-- Category tooltip -->
+        <span
+          class="pill"
+          [attr.title]="'post category'"
+        >
+          {{ p.categoryDto?.categoriesTitle || 'No category' }}
+        </span>
+      </div>
 
-        </article>
-    </section>
+      <div class="actions">
+        <!-- Comments button tooltip -->
+        <button
+          class="btn btn-small"
+          (click)="toggleComments(p.postId)"
+          [attr.title]="'Click to ' + (isExpanded(p.postId) ? 'hide' : 'show') + ' comments'"
+        >
+          {{ isExpanded(p.postId) ? 'Hide' : 'Show' }} Comments
+          ({{ p.comments?.length || 0 }})
+        </button>
+      </div>
+
+      <div class="comments" *ngIf="isExpanded(p.postId)">
+        <div *ngIf="!p.comments?.length" class="muted">No comments yet.</div>
+
+        <div *ngIf="p.comments?.length">
+          <div class="comments-title">Comments</div>
+
+          <div class="comment" *ngFor="let c of p.comments">
+            <span class="bullet">•</span>
+
+            <!-- Comment tooltip -->
+            <span class="comment-text" [attr.title]="c.content">
+              {{ c.content }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
 </div>
