@@ -1,1 +1,50 @@
-<p>profile works!</p>
+<div class="profile-layout">
+    <div class="profile-card">
+        <div class="cover-image">
+            <button class="nav-btn back" (click)="goBack()" aria-label="Go back">
+                <span>Dashboard</span>
+            </button>
+            <div class="cover-overlay"></div>
+        </div>
+
+        <div class="profile-content">
+            <div class="header-info">
+                <h1>{{ username || 'Guest' }}</h1>
+
+                <div class="stats-row">
+                    <span class="stat-value">{{ stats.posts }}</span> Posts
+                </div>
+            </div>
+
+            <div class="tabs-nav">
+                <button class="tab-btn" [class.active]="activeTab === 'posts'"
+                    (click)="setActiveTab('posts')">Posts</button>
+                <button class="tab-btn" [class.active]="activeTab === 'about'"
+                    (click)="setActiveTab('about')">About</button>
+            </div>
+
+            <div class="tab-content">
+                <div *ngIf="activeTab === 'posts'">
+                    <ng-container *ngIf="loading">Loading...</ng-container>
+                    <ng-container *ngIf="!loading">
+                        <div class="post-card real-post" *ngFor="let post of userPosts">
+                            <div class="post-img-header" [style.background]="getPostGradient(post.postId)">
+                                <span class="category-tag">{{ post.categoryDto?.categoriesTitle || 'General' }}</span>
+                            </div>
+                            <div class="post-body">
+                                <h4>{{ post.title }}</h4>
+                                <p class="post-excerpt">{{ getPostExcerpt(post.content) }}</p>
+                                <div class="post-meta">
+                                    <span class="date">{{ post.addedDate | date:'mediumDate' }}</span>
+                                    <span class="comments-count" *ngIf="post.comments?.length">
+                                        {{ post.comments.length }} comments
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,21 +15,23 @@ import { debounceTime, distinctUntilChanged, switchMap, of, catchError } from 'r
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
-  loading = true;
+  loading = false;
 
   posts: any[] = [];
-  allPosts: any[] = []; // ✅ store all posts (all pages)
+  allPosts: any[] = [];
 
   search = new FormControl<string>('', { nonNullable: true });
 
   expanded = new Set<number>();
+
+  username: string | null = null;
 
   constructor(
     private auth: AuthService,
     private postService: PostService,
     private router: Router,
     private toast: ToastService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // If your all-posts API is public, you do NOT need userId check here.
@@ -40,6 +42,9 @@ export class DashboardComponent implements OnInit {
       this.router.navigateByUrl('/login');
       return;
     }
+
+    // Get username for display
+    this.username = localStorage.getItem('username');
 
     // ✅ Load ALL posts (paginated)
     this.loadAllPosts();
@@ -103,12 +108,64 @@ export class DashboardComponent implements OnInit {
   }
 
   toggleComments(postId: number) {
-    if (this.expanded.has(postId)) this.expanded.delete(postId);
-    else this.expanded.add(postId);
+    if (this.expanded.has(postId)) {
+      this.expanded.delete(postId);
+    } else {
+      this.expanded.add(postId);
+    }
   }
 
   isExpanded(postId: number): boolean {
     return this.expanded.has(postId);
+  }
+
+  submitComment(post: any, event: Event) {
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+    if (!value.trim()) return;
+
+    this.postService.createComment(post.postId, value).subscribe({
+      next: (res: any) => {
+        // The API returns the created comment. Push it to local list.
+        if (!post.comments) post.comments = [];
+
+        // If response is the comment object
+        post.comments.push(res);
+
+        input.value = '';
+        this.toast.show('success', 'Comment added');
+      },
+      error: () => this.toast.show('error', 'Failed to add comment')
+    });
+  }
+
+  addComment(post: any, content: string) {
+    if (!content.trim()) return;
+
+    this.postService.createComment(post.postId, content).subscribe({
+      next: (newComment: any) => {
+        post.comments = post.comments || [];
+        post.comments.push(newComment);
+        this.toast.show('success', 'Comment added');
+      },
+      error: () => this.toast.show('error', 'Failed to add comment')
+    });
+  }
+
+  deleteComment(post: any, commentId: number) {
+    if (!confirm('Are you sure?')) return;
+
+    this.postService.deleteComment(commentId).subscribe({
+      next: () => {
+        post.comments = post.comments.filter((c: any) => c.id !== commentId);
+        this.toast.show('success', 'Comment deleted');
+      },
+      error: () => this.toast.show('error', 'Failed to delete comment')
+    });
+  }
+
+  goToProfile() {
+    this.router.navigateByUrl('/profile');
   }
 
   logout() {

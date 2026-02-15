@@ -1,0 +1,2831 @@
+{
+  "info": {
+    "_postman_id": "e9c952e2-7e2e-4cb0-80c0-b927650ee618",
+    "name": "blogapp",
+    "description": "## Overview\n\nThe **blogapp API** provides endpoints for managing users, categories, posts, and comments for a blogging platform.  \nIt covers typical CRUD operations and basic querying, such as:\n\n- User management (registration, login, profile, updates, deletion)\n    \n- Category management (create, update, delete, list)\n    \n- Post management (create, update, delete, list, filter by user or category)\n    \n- Comment management (create and list comments on posts)\n    \n\nThis collection is intended for development and testing within the team. It uses the **dev** environment for configuration and authentication.\n\n---\n\n## Getting Started\n\n### 1\\. Select the environment\n\n1. In Postman, open the collection: [<b>blogapp</b>](https://collection/19697234-e9c952e2-7e2e-4cb0-80c0-b927650ee618).\n    \n2. In the top-right environment dropdown, select **dev**:  \n    [<b>dev</b>](https://environment/19697234-c1db4360-3995-4d4c-975b-2ce235ab5eb3).\n    \n3. Ensure that the base URL and other variables (e.g. `{{base_url}}`, `{{token}}`) are correctly set in the **dev** environment.\n    \n\nTypical environment variables (example):\n\n- `base_url` – e.g. `http://localhost:9090/api`\n    \n- `token` – JWT or access token used for Bearer authentication\n    \n- Any additional variables specific to your API (e.g. `userId`, `postId`, `categoryId`)\n    \n\n> Note: Adjust the variable names above to match your actual environment definition. \n  \n\n---\n\n### 2\\. Authentication\n\nMost protected endpoints expect a **Bearer token** in the `Authorization` header.\n\nIn this collection, we use the environment variable `{{token}}`:\n\n\\`\\`\\`http  \nAuthorization: Bearer {{token}}",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "19697234"
+  },
+  "item": [
+    {
+      "name": "create-user",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\":\"amrish121221\",\r\n    \"email\":\"11121211@gmail.com\",\r\n    \"password\":\"Rbic#123\",\r\n    \"age\":23,\r\n    \"gender\":\"male\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/auth/create-user",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "auth",
+            "create-user"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "create-user",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"amrish121221\",\r\n    \"email\":\"11121211@gmail.com\",\r\n    \"password\":\"Rbic#123\",\r\n    \"age\":23,\r\n    \"gender\":\"male\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/auth/create-user",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "auth",
+                "create-user"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 15:17:31 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 354,\n    \"name\": \"amrish121221\",\n    \"email\": \"11121211@gmail.com\",\n    \"password\": \"$2a$10$mjajGJkDUNrHz4.i5EBATuhKMOC5OqcRE7Kbn/afCiEb08wWdc09C\",\n    \"age\": 23,\n    \"gender\": \"male\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "update user",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"JohnDoe\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"securePa\",\r\n  \"age\": 30,\r\n  \"gender\": \"Male\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/user/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "user",
+            "2"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "New Request",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"securePassword123\",\r\n  \"age\": 30,\r\n  \"gender\": \"Male\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/users/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "users",
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 22 Sep 2024 18:33:23 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 2,\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"password\": \"securePassword123\",\n    \"age\": 30,\n    \"gender\": \"Male\"\n}"
+        },
+        {
+          "name": "update user",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"JohnDoe\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"securePa\",\r\n  \"age\": 30,\r\n  \"gender\": \"Male\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/user/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "user",
+                "2"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 18:24:50 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 2,\n    \"name\": \"JohnDoe\",\n    \"email\": \"john.doe@example.com\",\n    \"password\": \"securePa\",\n    \"age\": 30,\n    \"gender\": \"Male\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "getUser",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjcwODQsImV4cCI6MTczNzE0NTA4NH0.oAqbMtEJXXWnaReTnUquh0n-e_po4kaU7vG4wcsbJ7cUrxpMQTSD-jOIyNJsNtpJB8vpkKpg9AOvJYIv0E7LdQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/user/204",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "user",
+            "204"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "New Request",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"securePassword123\",\r\n  \"age\": 30,\r\n  \"gender\": \"Male\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/users/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "users",
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 22 Sep 2024 18:33:23 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 2,\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"password\": \"securePassword123\",\n    \"age\": 30,\n    \"gender\": \"Male\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "getAllUser",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcyMDg4MDUsImV4cCI6MTczNzIyNjgwNX0.Hg2cgIlPUoomk83M1iymP1aVBBk8Aqmqbs84P1bmmVKt95KxMUm03qYFA12PTYk3wjRGPa7I2WrWurMHmMMaOg",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/user/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "user",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "New Request",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"securePassword123\",\r\n  \"age\": 30,\r\n  \"gender\": \"Male\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/users/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "users",
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 22 Sep 2024 18:33:23 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 2,\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"password\": \"securePassword123\",\n    \"age\": 30,\n    \"gender\": \"Male\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "deleteUser",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"securePassword123\",\r\n  \"age\": 30,\r\n  \"gender\": \"Male\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/user/53",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "user",
+            "53"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "New Request",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"securePassword123\",\r\n  \"age\": 30,\r\n  \"gender\": \"Male\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/users/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "users",
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 22 Sep 2024 18:33:23 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 2,\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"password\": \"securePassword123\",\n    \"age\": 30,\n    \"gender\": \"Male\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "create category",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"categoriesTitle\": \"1py3\",\r\n  \"categoryDescription\": \"this is good language\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/categories/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "categories",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "create category",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"categoriesTitle\": \"1py3\",\r\n  \"categoryDescription\": \"this is good language\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/categories/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "categories",
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 18:22:01 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"categoriesId\": 52,\n    \"categoriesTitle\": \"1py3\",\n    \"categoryDescription\": \"this is good language\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "update category",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"categoriesTitle\": \"javascript\",\r\n  \"categoryDescription\": \"this is good language\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/categories/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "categories",
+            "1"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "update category",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"categoriesTitle\": \"javascript\",\r\n  \"categoryDescription\": \"this is good language\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/categories/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "categories",
+                "1"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 18:28:58 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"categoriesId\": 1,\n    \"categoriesTitle\": \"javascript\",\n    \"categoryDescription\": \"this is good language\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "get category",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \r\n  \"categoriesTitle\": \"1py\",\r\n  \"categoryDescription\": \"this is good language\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/categories/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "categories",
+            "1"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "get category",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \r\n  \"categoriesTitle\": \"1py\",\r\n  \"categoryDescription\": \"this is good language\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/categories/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "categories",
+                "1"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 18:25:20 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"categoriesId\": 1,\n    \"categoriesTitle\": \"javascript\",\n    \"categoryDescription\": \"this is good language\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "get categorories",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"categoriesTitle\": \"1py\",\r\n  \"categoryDescription\": \"this is good language\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/categories/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "categories",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "get categorories",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"categoriesTitle\": \"1py\",\r\n  \"categoryDescription\": \"this is good language\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/categories/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "categories",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 18:27:21 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"categoriesId\": 1,\n        \"categoriesTitle\": \"javascript\",\n        \"categoryDescription\": \"this is good language\"\n    },\n    {\n        \"categoriesId\": 2,\n        \"categoriesTitle\": \"1py3\",\n        \"categoryDescription\": \"this is good language\"\n    },\n    {\n        \"categoriesId\": 3,\n        \"categoriesTitle\": \"1py3\",\n        \"categoryDescription\": \"this is good language\"\n    },\n    {\n        \"categoriesId\": 4,\n        \"categoriesTitle\": \"1py3\",\n        \"categoryDescription\": \"this is good language\"\n    },\n    {\n        \"categoriesId\": 5,\n        \"categoriesTitle\": \"1py3\",\n        \"categoryDescription\": \"this is good language\"\n    },\n    {\n        \"categoriesId\": 52,\n        \"categoriesTitle\": \"1py3\",\n        \"categoryDescription\": \"this is good language\"\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "delete category",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"categoriesTitle\": \"1py\",\r\n  \"categoryDescription\": \"this is good language\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/categories/53",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "categories",
+            "53"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "delete category",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"categoriesTitle\": \"1py\",\r\n  \"categoryDescription\": \"this is good language\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/categories/53",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "categories",
+                "53"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 18:27:48 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"category not found with Categrory : '53'\",\n    \"status\": false\n}"
+        }
+      ]
+    },
+    {
+      "name": "create post",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"post1\",\r\n  \"content\": \"this is good language1\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/user/1/category/2/posts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "user",
+            "1",
+            "category",
+            "2",
+            "posts"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "create post",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"post1\",\r\n  \"content\": \"this is good language1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/user/1/category/2/posts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "user",
+                "1",
+                "category",
+                "2",
+                "posts"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 18:22:39 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"postId\": 14,\n    \"title\": \"post1\",\n    \"content\": \"this is good language1\",\n    \"imageName\": \"default.png\",\n    \"addedDate\": \"2025-01-17T18:22:39.722+00:00\",\n    \"categoryDto\": {\n        \"categoriesId\": 2,\n        \"categoriesTitle\": \"1py3\",\n        \"categoryDescription\": \"this is good language\"\n    },\n    \"userDto\": {\n        \"id\": 1,\n        \"name\": \"John Doe12\",\n        \"email\": \"john.doe@example.com\",\n        \"password\": \"securePa\",\n        \"age\": 30,\n        \"gender\": \"Male\"\n    },\n    \"comments\": []\n}"
+        }
+      ]
+    },
+    {
+      "name": "update post",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"post1\",\r\n  \"content\": \"this is good language1\",\r\n  \"imageName\": \"hello.ja=pj\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/posts/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "posts",
+            "2"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "update post",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"post1\",\r\n  \"content\": \"this is good language1\",\r\n  \"imageName\": \"hello.ja=pj\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/posts/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "posts",
+                "2"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 18:28:12 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"post not found with postid : '2'\",\n    \"status\": false\n}"
+        }
+      ]
+    },
+    {
+      "name": "get post by category",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"post1\",\r\n  \"content\": \"this is good language1\",\r\n  \"imageName\": \"hello.ja=pj\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/category/1/posts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "category",
+            "1",
+            "posts"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "get post by category",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"post1\",\r\n  \"content\": \"this is good language1\",\r\n  \"imageName\": \"hello.ja=pj\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/category/1/posts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "category",
+                "1",
+                "posts"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 18:26:09 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "[]"
+        }
+      ]
+    },
+    {
+      "name": "get post by user",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"post1\",\r\n  \"content\": \"this is good language1\",\r\n  \"imageName\": \"hello.ja=pj\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/user/1/posts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "user",
+            "1",
+            "posts"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "get post by user",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"post1\",\r\n  \"content\": \"this is good language1\",\r\n  \"imageName\": \"hello.ja=pj\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/user/1/posts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "user",
+                "1",
+                "posts"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 18:25:50 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"postId\": 1,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-23T17:36:26.010+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": [\n            {\n                \"id\": 4,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 3,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 6,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 7,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 5,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 1,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 2,\n                \"content\": \"this is good language1\"\n            }\n        ]\n    },\n    {\n        \"postId\": 3,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-23T17:52:58.650+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 4,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:02:16.854+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 5,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:02:18.246+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 6,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:02:19.325+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 7,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:02:20.288+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 8,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:02:30.952+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 9,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:02:31.646+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 10,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:02:32.154+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 11,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:03:20.603+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": [\n            {\n                \"id\": 8,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 9,\n                \"content\": \"this is good language1\"\n            }\n        ]\n    },\n    {\n        \"postId\": 12,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:03:21.800+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": [\n            {\n                \"id\": 16,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 202,\n                \"content\": \"this is good ds\"\n            },\n            {\n                \"id\": 18,\n                \"content\": \"this is good ds\"\n            },\n            {\n                \"id\": 12,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 15,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 14,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 204,\n                \"content\": \"this is good ds\"\n            },\n            {\n                \"id\": 152,\n                \"content\": \"this is good ds\"\n            },\n            {\n                \"id\": 102,\n                \"content\": \"this is good ds\"\n            },\n            {\n                \"id\": 13,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 205,\n                \"content\": \"this is good ds\"\n            },\n            {\n                \"id\": 52,\n                \"content\": \"this is good ds\"\n            },\n            {\n                \"id\": 17,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 11,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 10,\n                \"content\": \"this is good language1\"\n            }\n        ]\n    },\n    {\n        \"postId\": 13,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-29T16:10:26.837+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 14,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2025-01-17T18:22:39.722+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "get post by id",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"post1\",\r\n  \"content\": \"this is good language1\",\r\n  \"imageName\": \"hello.ja=pj\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/posts/12",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "posts",
+            "12"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "get post by id",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"post1\",\r\n  \"content\": \"this is good language1\",\r\n  \"imageName\": \"hello.ja=pj\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/posts/12",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "posts",
+                "12"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 18:26:25 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"postId\": 12,\n    \"title\": \"post1\",\n    \"content\": \"this is good language1\",\n    \"imageName\": \"default.png\",\n    \"addedDate\": \"2024-09-24T11:03:21.800+00:00\",\n    \"categoryDto\": {\n        \"categoriesId\": 2,\n        \"categoriesTitle\": \"1py3\",\n        \"categoryDescription\": \"this is good language\"\n    },\n    \"userDto\": {\n        \"id\": 1,\n        \"name\": \"John Doe12\",\n        \"email\": \"john.doe@example.com\",\n        \"password\": \"securePa\",\n        \"age\": 30,\n        \"gender\": \"Male\"\n    },\n    \"comments\": [\n        {\n            \"id\": 17,\n            \"content\": \"this is good language1\"\n        },\n        {\n            \"id\": 15,\n            \"content\": \"this is good language1\"\n        },\n        {\n            \"id\": 52,\n            \"content\": \"this is good ds\"\n        },\n        {\n            \"id\": 16,\n            \"content\": \"this is good language1\"\n        },\n        {\n            \"id\": 204,\n            \"content\": \"this is good ds\"\n        },\n        {\n            \"id\": 13,\n            \"content\": \"this is good language1\"\n        },\n        {\n            \"id\": 12,\n            \"content\": \"this is good language1\"\n        },\n        {\n            \"id\": 202,\n            \"content\": \"this is good ds\"\n        },\n        {\n            \"id\": 152,\n            \"content\": \"this is good ds\"\n        },\n        {\n            \"id\": 18,\n            \"content\": \"this is good ds\"\n        },\n        {\n            \"id\": 10,\n            \"content\": \"this is good language1\"\n        },\n        {\n            \"id\": 205,\n            \"content\": \"this is good ds\"\n        },\n        {\n            \"id\": 11,\n            \"content\": \"this is good language1\"\n        },\n        {\n            \"id\": 102,\n            \"content\": \"this is good ds\"\n        },\n        {\n            \"id\": 14,\n            \"content\": \"this is good language1\"\n        }\n    ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "get all post",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"post1\",\r\n  \"content\": \"this is good language1\",\r\n  \"imageName\": \"hello.ja=pj\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/posts?pageNumber=0&direction=asc&pageSize=5",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "posts"
+          ],
+          "query": [
+            {
+              "key": "pageNumber",
+              "value": "0"
+            },
+            {
+              "key": "direction",
+              "value": "asc"
+            },
+            {
+              "key": "pageSize",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "get all post",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"post1\",\r\n  \"content\": \"this is good language1\",\r\n  \"imageName\": \"hello.ja=pj\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/posts?pageNumber=0&direction=asc&pageSize=5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "posts"
+              ],
+              "query": [
+                {
+                  "key": "pageNumber",
+                  "value": "0"
+                },
+                {
+                  "key": "direction",
+                  "value": "asc"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 18:26:40 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"content\": [\n        {\n            \"postId\": 1,\n            \"title\": \"post1\",\n            \"content\": \"this is good language1\",\n            \"imageName\": \"default.png\",\n            \"addedDate\": \"2024-09-23T17:36:26.010+00:00\",\n            \"categoryDto\": {\n                \"categoriesId\": 2,\n                \"categoriesTitle\": \"1py3\",\n                \"categoryDescription\": \"this is good language\"\n            },\n            \"userDto\": {\n                \"id\": 1,\n                \"name\": \"John Doe12\",\n                \"email\": \"john.doe@example.com\",\n                \"password\": \"securePa\",\n                \"age\": 30,\n                \"gender\": \"Male\"\n            },\n            \"comments\": [\n                {\n                    \"id\": 4,\n                    \"content\": \"this is good language1\"\n                },\n                {\n                    \"id\": 6,\n                    \"content\": \"this is good language1\"\n                },\n                {\n                    \"id\": 7,\n                    \"content\": \"this is good language1\"\n                },\n                {\n                    \"id\": 5,\n                    \"content\": \"this is good language1\"\n                },\n                {\n                    \"id\": 1,\n                    \"content\": \"this is good language1\"\n                },\n                {\n                    \"id\": 2,\n                    \"content\": \"this is good language1\"\n                },\n                {\n                    \"id\": 3,\n                    \"content\": \"this is good language1\"\n                }\n            ]\n        },\n        {\n            \"postId\": 3,\n            \"title\": \"post1\",\n            \"content\": \"this is good language1\",\n            \"imageName\": \"default.png\",\n            \"addedDate\": \"2024-09-23T17:52:58.650+00:00\",\n            \"categoryDto\": {\n                \"categoriesId\": 2,\n                \"categoriesTitle\": \"1py3\",\n                \"categoryDescription\": \"this is good language\"\n            },\n            \"userDto\": {\n                \"id\": 1,\n                \"name\": \"John Doe12\",\n                \"email\": \"john.doe@example.com\",\n                \"password\": \"securePa\",\n                \"age\": 30,\n                \"gender\": \"Male\"\n            },\n            \"comments\": []\n        },\n        {\n            \"postId\": 4,\n            \"title\": \"post1\",\n            \"content\": \"this is good language1\",\n            \"imageName\": \"default.png\",\n            \"addedDate\": \"2024-09-24T11:02:16.854+00:00\",\n            \"categoryDto\": {\n                \"categoriesId\": 2,\n                \"categoriesTitle\": \"1py3\",\n                \"categoryDescription\": \"this is good language\"\n            },\n            \"userDto\": {\n                \"id\": 1,\n                \"name\": \"John Doe12\",\n                \"email\": \"john.doe@example.com\",\n                \"password\": \"securePa\",\n                \"age\": 30,\n                \"gender\": \"Male\"\n            },\n            \"comments\": []\n        },\n        {\n            \"postId\": 5,\n            \"title\": \"post1\",\n            \"content\": \"this is good language1\",\n            \"imageName\": \"default.png\",\n            \"addedDate\": \"2024-09-24T11:02:18.246+00:00\",\n            \"categoryDto\": {\n                \"categoriesId\": 2,\n                \"categoriesTitle\": \"1py3\",\n                \"categoryDescription\": \"this is good language\"\n            },\n            \"userDto\": {\n                \"id\": 1,\n                \"name\": \"John Doe12\",\n                \"email\": \"john.doe@example.com\",\n                \"password\": \"securePa\",\n                \"age\": 30,\n                \"gender\": \"Male\"\n            },\n            \"comments\": []\n        },\n        {\n            \"postId\": 6,\n            \"title\": \"post1\",\n            \"content\": \"this is good language1\",\n            \"imageName\": \"default.png\",\n            \"addedDate\": \"2024-09-24T11:02:19.325+00:00\",\n            \"categoryDto\": {\n                \"categoriesId\": 2,\n                \"categoriesTitle\": \"1py3\",\n                \"categoryDescription\": \"this is good language\"\n            },\n            \"userDto\": {\n                \"id\": 1,\n                \"name\": \"John Doe12\",\n                \"email\": \"john.doe@example.com\",\n                \"password\": \"securePa\",\n                \"age\": 30,\n                \"gender\": \"Male\"\n            },\n            \"comments\": []\n        }\n    ],\n    \"pageNumber\": 0,\n    \"pageSize\": 5,\n    \"totalElements\": 13,\n    \"totalPages\": 3,\n    \"lastPage\": false\n}"
+        }
+      ]
+    },
+    {
+      "name": "search post",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"post1\",\r\n  \"content\": \"this is good language1\",\r\n  \"imageName\": \"hello.ja=pj\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/posts/search/post",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "posts",
+            "search",
+            "post"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "search post",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"post1\",\r\n  \"content\": \"this is good language1\",\r\n  \"imageName\": \"hello.ja=pj\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/posts/search/post",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "posts",
+                "search",
+                "post"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 18:23:25 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"postId\": 1,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-23T17:36:26.010+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": [\n            {\n                \"id\": 7,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 1,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 5,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 4,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 3,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 6,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 2,\n                \"content\": \"this is good language1\"\n            }\n        ]\n    },\n    {\n        \"postId\": 3,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-23T17:52:58.650+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 4,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:02:16.854+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 5,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:02:18.246+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 6,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:02:19.325+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 7,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:02:20.288+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 8,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:02:30.952+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 9,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:02:31.646+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 10,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:02:32.154+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 11,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:03:20.603+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": [\n            {\n                \"id\": 9,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 8,\n                \"content\": \"this is good language1\"\n            }\n        ]\n    },\n    {\n        \"postId\": 12,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-24T11:03:21.800+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": [\n            {\n                \"id\": 17,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 102,\n                \"content\": \"this is good ds\"\n            },\n            {\n                \"id\": 152,\n                \"content\": \"this is good ds\"\n            },\n            {\n                \"id\": 14,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 12,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 52,\n                \"content\": \"this is good ds\"\n            },\n            {\n                \"id\": 18,\n                \"content\": \"this is good ds\"\n            },\n            {\n                \"id\": 204,\n                \"content\": \"this is good ds\"\n            },\n            {\n                \"id\": 11,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 202,\n                \"content\": \"this is good ds\"\n            },\n            {\n                \"id\": 15,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 16,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 10,\n                \"content\": \"this is good language1\"\n            },\n            {\n                \"id\": 13,\n                \"content\": \"this is good language1\"\n            }\n        ]\n    },\n    {\n        \"postId\": 13,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2024-09-29T16:10:26.837+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    },\n    {\n        \"postId\": 14,\n        \"title\": \"post1\",\n        \"content\": \"this is good language1\",\n        \"imageName\": \"default.png\",\n        \"addedDate\": \"2025-01-17T18:22:39.722+00:00\",\n        \"categoryDto\": {\n            \"categoriesId\": 2,\n            \"categoriesTitle\": \"1py3\",\n            \"categoryDescription\": \"this is good language\"\n        },\n        \"userDto\": {\n            \"id\": 1,\n            \"name\": \"John Doe12\",\n            \"email\": \"john.doe@example.com\",\n            \"password\": \"securePa\",\n            \"age\": 30,\n            \"gender\": \"Male\"\n        },\n        \"comments\": []\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "delete post",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"\"\r\n  \"categoriesTitle\": \"1py\",\r\n  \"categoryDescription\": \"this is good language\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/posts/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "posts",
+            "2"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "delete post",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"\"\r\n  \"categoriesTitle\": \"1py\",\r\n  \"categoryDescription\": \"this is good language\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/posts/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "posts",
+                "2"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 18:28:28 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"post not found with postid : '2'\",\n    \"status\": false\n}"
+        }
+      ]
+    },
+    {
+      "name": "delete comment",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"\"\r\n  \"categoriesTitle\": \"1py\",\r\n  \"categoryDescription\": \"this is good language\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/comments/203",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "comments",
+            "203"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "delete comment",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"\"\r\n  \"categoriesTitle\": \"1py\",\r\n  \"categoryDescription\": \"this is good language\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/comments/203",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "comments",
+                "203"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 18:28:42 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"comment not found with comment id : '203'\",\n    \"status\": false\n}"
+        }
+      ]
+    },
+    {
+      "name": "create comments",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"content\": \"this is good ds\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/post/12/comments",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "post",
+            "12",
+            "comments"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "create comments",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"content\": \"this is good ds\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/post/12/comments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "post",
+                "12",
+                "comments"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 18:23:55 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 205,\n    \"content\": \"this is good ds\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "jwtlogin",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();\r",
+              "pm.environment.set(\"token\", json.token);\r",
+              "console.log(\"saved token: \",pm.environment.get(\"token\"));"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\":\"111212112@gmail.com\",\r\n    \"password\":\"Rbic#123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "jwtlogin",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\":\"11121211@gmail.com\",\r\n    \"password\":\"Rbic#123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 15:55:26 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"username\": \"11121211@gmail.com\",\n    \"token\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "create order",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcyOTM1OTIsImV4cCI6MTczNzMxMTU5Mn0.8yQK4Yn23NDeBdwNa6fQDAeewPHsQ1NUyTqkidWM_nZx9YnxA-mrmGt09QqNMdRl17S-DqsVP0RoaUz60VAeYQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"amount\": 1,\r\n    \"currency\": \"INR\",\r\n    \"receipt\": \"receipt_123\",\r\n    \"notes\": \"Test payment\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/payments/create-order",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "payments",
+            "create-order"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "jwtlogin",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\":\"11121211@gmail.com\",\r\n    \"password\":\"Rbic#123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 17 Jan 2025 15:55:26 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"username\": \"11121211@gmail.com\",\n    \"token\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcxMjkzMjYsImV4cCI6MTczNzE0NzMyNn0.qwPJE9vWEgvaYAysVFzG9rLg_SnbaPMXtEcFgDeuV1ojuXxpiLEAFDWBVY6LkGc7hJ5Vo13Y4rJC3YLiAr_grw\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "create order Copy",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEyMTIxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzcyOTM1OTIsImV4cCI6MTczNzMxMTU5Mn0.8yQK4Yn23NDeBdwNa6fQDAeewPHsQ1NUyTqkidWM_nZx9YnxA-mrmGt09QqNMdRl17S-DqsVP0RoaUz60VAeYQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\":\"11121211@gmail.com\",\r\n    \"password\":\"Rbic#123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/api/payments/verify-payment",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "api",
+            "payments",
+            "verify-payment"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "create order Copy",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\":\"11121211@gmail.com\",\r\n    \"password\":\"Rbic#123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/payments/verify-payment",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "payments",
+                "verify-payment"
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "openai",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          "const token = pm.environment.get(\"token\");\r",
+          "\r",
+          "if (token) {\r",
+          "  pm.request.headers.upsert({\r",
+          "    key: \"Authorization\",\r",
+          "    value: `Bearer ${token}`\r",
+          "  });\r",
+          "}\r",
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}

@@ -28,6 +28,44 @@ export class PostService {
     );
   }
 
+  // Get single post by ID
+  getPostById(postId: number): Observable<Post> {
+    return this.http.get<Post>(`${this.baseUrl}/api/posts/${postId}`);
+  }
+
+  // Create a new post
+  createPost(post: any, userId: number, categoryId: number): Observable<Post> {
+    return this.http.post<Post>(
+      `${this.baseUrl}/api/user/${userId}/category/${categoryId}/posts`,
+      post
+    );
+  }
+
+  // Update an existing post
+  updatePost(postId: number, post: any): Observable<Post> {
+    return this.http.put<Post>(`${this.baseUrl}/api/posts/${postId}`, post);
+  }
+
+  // Delete a post
+  deletePost(postId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/api/posts/${postId}`);
+  }
+
+  // Get posts by category
+  getPostsByCategory(categoryId: number): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.baseUrl}/api/category/${categoryId}/posts`);
+  }
+
+  // Create a comment
+  createComment(postId: number, content: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/post/${postId}/comments`, { content });
+  }
+
+  // Delete a comment
+  deleteComment(commentId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/api/comments/${commentId}`);
+  }
+
   // paginated all posts
   getPosts(pageNumber = 0, pageSize = 5, direction: 'asc' | 'desc' = 'asc')
     : Observable<PostsPageResponse> {
